@@ -51,11 +51,14 @@ class MainActivity : ComponentActivity() {
                                             Log.d("asdf", "${result.scope}")
                                             refreshToken = result.refreshToken!!
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            val a = "onFail"
+                                        },
                                     )
                                 }
                             },
                             content = {
+                                Text("Login")
                             },
                         )
                         Button(
@@ -66,11 +69,14 @@ class MainActivity : ComponentActivity() {
                                         onSuccess = {
                                             val a = 1
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            val a = "onFail"
+                                        },
                                     )
                                 }
                             },
                             content = {
+                                Text("Logout")
                             },
                         )
                         Button(
@@ -82,11 +88,14 @@ class MainActivity : ComponentActivity() {
 
                                             val a = credentials.refreshToken
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            val a = "onFail"
+                                        },
                                     )
                                 }
                             },
                             content = {
+                                Text("Refresh Token")
                             },
                         )
                     }

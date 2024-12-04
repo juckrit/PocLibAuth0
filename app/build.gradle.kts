@@ -17,12 +17,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        //        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
-        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii" //kp
+
+        //Kingpower
+//        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii"
+//        manifestPlaceholders["auth0Scheme"] = "https"
+//        manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
+//        manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
+//        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
+
+        //Firster
+        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
         manifestPlaceholders["auth0Scheme"] = "https"
         manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
         manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
-        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
+        manifestPlaceholders["auth0Audience"] = "f1_api"
     }
 
     buildTypes {
@@ -30,7 +38,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
