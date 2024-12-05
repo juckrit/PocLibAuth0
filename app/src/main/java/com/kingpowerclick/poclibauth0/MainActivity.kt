@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,29 +13,39 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.kingpowerclick.android.auth0.AuthenticationManager
 import com.kingpowerclick.android.auth0.CredentialsModel
 import com.kingpowerclick.poclibauth0.ui.theme.PocLibAuth0Theme
+import com.kingpowerclick.poclibauth0.ui.theme.Purple80
+import com.kingpowerclick.poclibauth0.ui.theme.Yellow
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var authenticationManager: AuthenticationManager
-    private var refreshToken = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         authenticationManager = AuthenticationManager(this)
         enableEdgeToEdge()
         setContent {
             val scope = rememberCoroutineScope()
-
+            var refreshToken by remember {
+                mutableStateOf("")
+            }
             PocLibAuth0Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column {
+                Scaffold(modifier = Modifier.fillMaxSize().background(Yellow)) { innerPadding ->
+                    Column(
+                        modifier = Modifier.fillMaxSize().background(Yellow)
+                    ) {
                         Greeting(
-                            name = "Android",
                             modifier = Modifier.padding(innerPadding),
                         )
                         Button(
@@ -51,14 +62,19 @@ class MainActivity : ComponentActivity() {
                                             Log.d("asdf", "${result.scope}")
                                             refreshToken = result.refreshToken!!
                                         },
-                                        onFail = {
-                                            val a = "onFail"
-                                        },
+                                        onFail = {},
                                     )
                                 }
                             },
                             content = {
-                                Text("Login")
+                                Text(
+                                    text =
+                                        if (refreshToken.isBlank()) {
+                                            "Login"
+                                        } else {
+                                            "Already Login refreshToken = $refreshToken"
+                                        },
+                                )
                             },
                         )
                         Button(
@@ -69,14 +85,19 @@ class MainActivity : ComponentActivity() {
                                         onSuccess = {
                                             val a = 1
                                         },
-                                        onFail = {
-                                            val a = "onFail"
-                                        },
+                                        onFail = {},
                                     )
                                 }
                             },
                             content = {
-                                Text("Logout")
+                                Text(
+                                    text =
+                                        if (refreshToken.isBlank()) {
+                                            "Already Logout"
+                                        } else {
+                                            "Logout"
+                                        },
+                                )
                             },
                         )
                         Button(
@@ -86,16 +107,21 @@ class MainActivity : ComponentActivity() {
                                         refreshToken = refreshToken,
                                         onSuccess = { credentials: CredentialsModel ->
 
-                                            val a = credentials.refreshToken
+                                            refreshToken = credentials.refreshToken!!
                                         },
-                                        onFail = {
-                                            val a = "onFail"
-                                        },
+                                        onFail = {},
                                     )
                                 }
                             },
                             content = {
-                                Text("Refresh Token")
+                                Text(
+                                    text =
+                                        if (refreshToken.isBlank()) {
+                                            "Login to enable refreshToken"
+                                        } else {
+                                            "refreshToken = $refreshToken"
+                                        },
+                                )
                             },
                         )
                     }
@@ -107,7 +133,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(
-    name: String,
+    name: String = stringResource(R.string.app_name),
     modifier: Modifier = Modifier,
 ) {
     Text(
@@ -120,6 +146,6 @@ fun Greeting(
 @Composable
 fun GreetingPreview() {
     PocLibAuth0Theme {
-        Greeting("Android")
+        Greeting(stringResource(R.string.app_name))
     }
 }
