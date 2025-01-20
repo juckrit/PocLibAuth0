@@ -18,22 +18,22 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Kingpower dev
-        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii"
-        manifestPlaceholders["auth0Scheme"] = "https"
-        manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
-        manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
-        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
-        manifestPlaceholders["auth0Organization"] = "kp"
-        applicationId = "com.kingpower.dev"
-
-        // Firster dev
-//        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
+//        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii"
 //        manifestPlaceholders["auth0Scheme"] = "https"
 //        manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
 //        manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
-//        manifestPlaceholders["auth0Audience"] = "f1_api"
-//        manifestPlaceholders["auth0Organization"] = "f1"
-//        applicationId = "com.kpc.hisdev"
+//        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
+//        manifestPlaceholders["auth0Organization"] = "kp"
+//        applicationId = "com.kingpower.dev"
+
+        // Firster dev
+        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
+        manifestPlaceholders["auth0Scheme"] = "https"
+        manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
+        manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
+        manifestPlaceholders["auth0Audience"] = "f1_api"
+        manifestPlaceholders["auth0Organization"] = "f1"
+        applicationId = "com.kpc.hisdev"
     }
 
     buildTypes {
@@ -64,7 +64,7 @@ dependencies {
 //    implementation("com.github.juckrit:androidauth0:1.0.4") ไม่ได้
 //    implementation("com.github.juckrit:androidauth0:1.0.5") ไม่ได้
 //    implementation("com.github.juckrit:androidauth0:1.0.6") debug ok other not ok
-    implementation("com.github.juckrit:androidauth0:1.0.7")
+    implementation("com.github.juckrit:androidauth0:2.0.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
